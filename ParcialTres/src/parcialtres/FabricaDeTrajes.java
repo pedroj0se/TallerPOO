@@ -26,6 +26,7 @@ public class FabricaDeTrajes implements IFabricaDeTrajes{
         System.out.println("2.- Listar Componentes del almacén");
         System.out.println("3.- Crear traje y añadir a almacén");
         System.out.println("4.- Listar trajes del almacén");
+        System.out.println("5.- Mostrar cantidad de componentes por tipo");
         System.out.println("7.- Activar/Desactivar las rebajas");
         System.out.println("8.- Crear envío");
         System.out.println("9.- Crear componentes de prueba");
@@ -254,6 +255,28 @@ public class FabricaDeTrajes implements IFabricaDeTrajes{
         }
     }
 
+    // Método para mostrar la cantidad de componentes por tipo
+    
+    public void mostrarCantidadComponentesPorTipo() {
+        int chaquetas = 0, blusas = 0, faldas = 0, pantalones = 0;
+        for (Componente componente : componentesEnAlmacen) {
+            if (componente instanceof Chaqueta) {
+                chaquetas++;
+            } else if (componente instanceof Blusa) {
+                blusas++;
+            } else if (componente instanceof Falda) {
+                faldas++;
+            } else if (componente instanceof Pantalon) {
+                pantalones++;
+            }
+        }
+        System.out.println("Cantidad de componentes por tipo:");
+        System.out.println("Chaquetas: " + chaquetas);
+        System.out.println("Blusas: " + blusas);
+        System.out.println("Faldas: " + faldas);
+        System.out.println("Pantalones: " + pantalones);
+    }
+
     // Método para activar/desactivar las rebajas
     @Override
     public void activarDesactivarRebajas() {
@@ -342,36 +365,32 @@ public class FabricaDeTrajes implements IFabricaDeTrajes{
             try {
                 switch (opcion) {
                     case 1:
-                            fabrica.añadirComponenteAlmacen();
-                            break;
+                        fabrica.añadirComponenteAlmacen();
+                        break;
                     case 2:
                         fabrica.listarComponentes();
                         break;
-
                     case 3:
                         fabrica.añadirTrajeAAlmacen();
                         break;
-
                     case 4:
                         fabrica.listarTrajes();
                         break;
-
+                    case 5: // Llamar al método para mostrar cantidad de componentes por tipo
+                        fabrica.mostrarCantidadComponentesPorTipo();
+                        break;
                     case 7:
                         fabrica.activarDesactivarRebajas();
                         break;
-
                     case 8:
                         fabrica.crearEnvio();
                         break;
-
                     case 9:
                         fabrica.crearComponentesDePrueba();
                         break;
-
                     case 0:
                         System.out.println("Saliendo del programa.");
                         break;
-
                     default:
                         System.out.println("Opción no válida.");
                         break;
@@ -383,6 +402,5 @@ public class FabricaDeTrajes implements IFabricaDeTrajes{
         } while (opcion != 0);
 
         scanner.close();
-    
     }
 }
